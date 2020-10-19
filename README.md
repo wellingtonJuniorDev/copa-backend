@@ -1,10 +1,10 @@
-# Portal Esportes Backend
+# Copa - Backend
 
 This project was generated with Visual Studio Community 2019, aspnetcore version 3.1
 
 ## Environment settings
 
-In the appsettings file, at the root of the project, set the WebHost environment variable to the endpoint of the Web application, developed in Angular. 
+In the appsettings file, at the root of the project, set the **WebHost** environment variable to the **endpoint of the Web application**, developed in Angular. 
 It's required by CORS policy.
 
 ## Development server
