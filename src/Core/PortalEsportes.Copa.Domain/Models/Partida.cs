@@ -42,6 +42,23 @@ namespace PortalEsportes.Copa.Domain.Models
         {
             return PrimeiraEquipe.Gols > SegundaEquipe.Gols;
         }
+
+        public override bool Equals(object obj)
+        {
+            var compareTo = obj as Partida;
+
+            if (ReferenceEquals(this, compareTo)) return true;
+            if (compareTo is null) return false;
+
+            return PrimeiraEquipe.Equals(compareTo.PrimeiraEquipe) &&
+                   SegundaEquipe.Equals(compareTo.SegundaEquipe) &&
+                   EquipeVencedora.Equals(compareTo.EquipeVencedora);
+        }
+
+        public override int GetHashCode()
+        {
+            return (GetType().GetHashCode() * 911) + EquipeVencedora.Id.GetHashCode();
+        }
     }
 
 

@@ -86,8 +86,8 @@ namespace PortalEsportes.Copa.Application.Tests
         }
                 
         [Fact]
-        [Trait("IPartidasService_ObterPartidasPrimeiraFase", "Exception")]
-        public void IPartidasService_ObterPartidasPrimeiraFase_Exception()
+        [Trait("IPartidasService_ObterPartidasPrimeiraFase", "Falha")]
+        public void IPartidasService_ObterPartidasPrimeiraFase_Falha()
         {
             var equipes = testsFixture.GerarEquipesRandomicas(10);
 
@@ -98,8 +98,8 @@ namespace PortalEsportes.Copa.Application.Tests
         }
 
         [Fact]
-        [Trait("IPartidasService_ObterPartidasSegundaFase", "Exception")]
-        public void IPartidasService_ObterPartidasSegunda_Exception()
+        [Trait("IPartidasService_ObterPartidasSegundaFase", "Falha")]
+        public void IPartidasService_ObterPartidasSegunda_Falha()
         {
             var equipes = testsFixture.GerarEquipesRandomicas(5);
 
@@ -110,8 +110,8 @@ namespace PortalEsportes.Copa.Application.Tests
         }
 
         [Fact]
-        [Trait("IPartidasService_ObterPartidaFinal", "Exception")]
-        public void IPartidasService_ObterPartidaFinal_Exception()
+        [Trait("IPartidasService_ObterPartidaFinal", "Falha")]
+        public void IPartidasService_ObterPartidaFinal_Falha()
         {
             var equipes = testsFixture.GerarEquipesRandomicas(4);
 
@@ -139,17 +139,7 @@ namespace PortalEsportes.Copa.Application.Tests
 
             Assert.Equal(4, partidasPrimeiraFase.Count());
 
-            Assert.True(partidasEsperadas.ElementAt(0).EquipeVencedora
-                .Equals(partidasPrimeiraFase.ElementAt(0).EquipeVencedora));
-
-            Assert.True(partidasEsperadas.ElementAt(1).EquipeVencedora
-                .Equals(partidasPrimeiraFase.ElementAt(1).EquipeVencedora));
-
-            Assert.True(partidasEsperadas.ElementAt(2).EquipeVencedora
-                .Equals(partidasPrimeiraFase.ElementAt(2).EquipeVencedora));
-
-            Assert.True(partidasEsperadas.ElementAt(3).EquipeVencedora
-                .Equals(partidasPrimeiraFase.ElementAt(3).EquipeVencedora));
+            Assert.Equal(partidasEsperadas, partidasPrimeiraFase);
         }
 
         [Fact]
@@ -168,11 +158,7 @@ namespace PortalEsportes.Copa.Application.Tests
 
             Assert.Equal(2, partidasSegundaFase.Count());
 
-            Assert.True(partidasEsperadas.ElementAt(0).EquipeVencedora
-                .Equals(partidasSegundaFase.ElementAt(0).EquipeVencedora));
-
-            Assert.True(partidasEsperadas.ElementAt(1).EquipeVencedora
-                .Equals(partidasSegundaFase.ElementAt(1).EquipeVencedora));
+            Assert.Equal(partidasEsperadas, partidasSegundaFase);
         }
 
         [Fact]
@@ -187,12 +173,7 @@ namespace PortalEsportes.Copa.Application.Tests
 
             Assert.IsType<Partida>(partidaFinal);
 
-            Assert.True(partidaEsperada.PrimeiraEquipe
-                .Equals(partidaFinal.PrimeiraEquipe));
-
-            Assert.True(partidaEsperada.SegundaEquipe
-                .Equals(partidaFinal.SegundaEquipe));
-
+            Assert.Equal(partidaEsperada, partidaFinal);
         }
     }
 }

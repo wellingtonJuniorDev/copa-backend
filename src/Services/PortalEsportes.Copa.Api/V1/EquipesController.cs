@@ -24,9 +24,14 @@ namespace PortalEsportes.Copa.Api.V1
                 throw new ArgumentNullException(nameof(mapper));
         }
 
+        /// <summary>
+        /// Recurso que obtém as equipes de uma fonte externa.
+        /// </summary>
+        /// <returns>Uma coleção de equipes.</returns>
+        /// <response code="200">Retorna uma coleção de 16 equipes.</response>
+        /// <response code="500">Houve um erro interno no servidor da aplicação.</response>
         [HttpGet]
         [ProducesResponseType(typeof(EquipeViewModel), 200)]
-        [ProducesResponseType(typeof(NotFoundResult), 404)]
         [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> ObterEquipesAsync()
         {

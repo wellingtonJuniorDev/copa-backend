@@ -1,18 +1,25 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
 
 namespace PortalEsportes.Copa.Api.Configuration
 {
     public static class SwaggerConfig
     {
+        private static readonly string xmlCommentsFilePath =
+            Path.Combine(PlatformServices.Default.Application.ApplicationBasePath,
+                $"{PlatformServices.Default.Application.ApplicationName}.xml");
+
         public static void AddSwaggerConfiguration(this IServiceCollection services)
         {
-            services.AddSwaggerGen(c =>
+
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo()
+                options.SwaggerDoc("v1", new OpenApiInfo()
                 {
                     Title = "Portal de Esportes - Copa Api",
                     Description = "Esta Api faz parte da Copa entre Equipes do Portal de Esportes.",
@@ -20,7 +27,7 @@ namespace PortalEsportes.Copa.Api.Configuration
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                 });
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "Insira o token JWT desta maneira: Bearer {seu token}",
                     Name = "Authorization",
@@ -30,7 +37,7 @@ namespace PortalEsportes.Copa.Api.Configuration
                     Type = SecuritySchemeType.ApiKey
                 });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme
@@ -45,6 +52,10 @@ namespace PortalEsportes.Copa.Api.Configuration
                     }
                 });
 
+                if (File.Exists(xmlCommentsFilePath))
+                {
+                    options.IncludeXmlComments(xmlCommentsFilePath);
+                }
             });
         }
 

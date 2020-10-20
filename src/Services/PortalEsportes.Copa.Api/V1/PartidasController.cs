@@ -32,6 +32,14 @@ namespace PortalEsportes.Copa.Api.V1
                 throw new ArgumentNullException(nameof(mapper));
         }
 
+        /// <summary>
+        /// Recurso que recebe uma coleção de 08 equipes e realiza a copa.
+        /// </summary>
+        /// <param name="equipesIds">Os identificadores das equipes</param>
+        /// <returns>As equipes campeã e vice-campeã.</returns>
+        /// <response code="200">Retorna o resultado da copa.</response>
+        /// <response code="400">Entrada inválida, veja as mensagens de erro.</response>  
+        /// <response code="500">Houve um erro interno no servidor da aplicação.</response>
         [HttpPost("copa")]
         [ProducesResponseType(typeof(EquipeResultadoViewModel), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
